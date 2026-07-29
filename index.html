@@ -1424,6 +1424,20 @@
   
 <!-- JavaScrip Toggles Logic -->
 <script>
+
+
+  // ======================================
+// 6. FINAL INITIALIZATION (Single DOMContentLoaded)
+// ======================================
+window.addEventListener("DOMContentLoaded", () => {
+    buildSearchData();
+    loadBookmarks();
+    setupBookmarkButtons();
+  setupShareButtons();
+    updateBookmarkIcons();
+    applySearchFilters(); // इनिशियली डेटा को रेंडर और फ़िल्टर करने के लिए
+});
+  
 const menuBtn = document.getElementById("menuBtn");
 const closeMenu = document.getElementById("closeMenu");
 const mobileMenu = document.getElementById("mobileMenu");
@@ -2434,17 +2448,7 @@ window.addEventListener("scroll", () => {
 });
 
 
-// ======================================
-// 6. FINAL INITIALIZATION (Single DOMContentLoaded)
-// ======================================
-window.addEventListener("DOMContentLoaded", () => {
-    buildSearchData();
-    loadBookmarks();
-    setupBookmarkButtons();
-  setupShareButtons();
-    updateBookmarkIcons();
-    applySearchFilters(); // इनिशियली डेटा को रेंडर और फ़िल्टर करने के लिए
-});
+
 </script>
 
 </body>
