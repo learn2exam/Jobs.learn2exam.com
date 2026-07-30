@@ -1827,8 +1827,9 @@ function setupBookmarkButtons() {
             if (!jobCard) return;
             currentShareData = generateShareData(jobCard);
 
-        //    if (navigator.share)
-           if (false) {
+        //    if (false) change 👉 if (navigator.share)
+          if (navigator.share)
+           {
 
                 navigator.share({
                     title: currentShareData.title,
