@@ -1361,17 +1361,6 @@
         </div>
     </div>
 </aside>
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
  <!-- अपने index.html और बाद में bookmarks.html में </body> टैग के ठीक ऊपर यह HTML जोड़ दें।👇👇
   -->
@@ -1386,9 +1375,23 @@
     <!-- Share Box -->
     <div class="absolute bottom-0 left-0 right-0 bg-white dark:bg-slate-900 rounded-t-2xl p-5">
 
-        <h3 class="text-lg font-semibold mb-4">
-            Share Job
-        </h3>
+        <div class="flex items-center justify-between mb-4">
+
+    <h3 class="text-lg font-semibold">
+        Share Job
+    </h3>
+
+    <button
+        id="shareMenuClose"
+        type="button"
+        class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+        aria-label="Close Share Menu">
+
+        <i class="fa-solid fa-xmark text-lg"></i>
+
+    </button>
+
+</div>
 
         <div class="grid grid-cols-4 gap-4">
 
@@ -1423,9 +1426,74 @@
   
   
 <!-- JavaScrip Toggles Logic -->
+  
+  
+  <!-- Live Search & Filters Logic -->
 <script>
+// ======================================
+// 1. GLOBAL VARIABLES & SELECTORS
+// ======================================
 
+// Hero Search Elements
+const jobSearch = document.getElementById("jobSearch");
+const heroCategory = document.getElementById("heroCategory");
+const heroState = document.getElementById("heroState");
+const heroSearchBtn = document.getElementById("heroSearchBtn");
 
+// Header Search Elements
+const headerSearch = document.getElementById("headerSearch");
+const headerSearchBtn = document.getElementById("headerSearchBtn");
+const headerSearchWrapper = document.getElementById("headerSearchWrapper");
+const headerSearchClose = document.getElementById("headerSearchClose");
+
+// Desktop Sidebar Filters
+const filterCategory = document.getElementById("filterCategory");
+const filterDepartment = document.getElementById("filterDepartment");
+const filterQualification = document.getElementById("filterQualification");
+const filterState = document.getElementById("filterState");
+const filterJobType = document.getElementById("filterJobType");
+const filterSalary = document.getElementById("filterSalary");
+const filterLastDate = document.getElementById("filterLastDate");
+
+const applyFilters = document.getElementById("applyFilters");
+const resetFilters = document.getElementById("resetFilters");
+const activeFilterCount = document.getElementById("activeFilterCount");
+
+// Mobile Drawer Filters
+const mobileFilterCategory = document.getElementById("mobileFilterCategory");
+const mobileFilterDepartment = document.getElementById("mobileFilterDepartment");
+const mobileFilterQualification = document.getElementById("mobileFilterQualification");
+const mobileFilterState = document.getElementById("mobileFilterState");
+const mobileFilterJobType = document.getElementById("mobileFilterJobType");
+const mobileFilterSalary = document.getElementById("mobileFilterSalary");
+const mobileFilterLastDate = document.getElementById("mobileFilterLastDate");
+
+const mobileApplyFilters = document.getElementById("mobileApplyFilters");
+const mobileResetFilters = document.getElementById("mobileResetFilters");
+
+// Core Logic & Pagination Variables
+let allJobs = [];
+let filteredJobs = [];
+let debounceTimer;
+let currentPage = 1;        
+const cardsPerPage = 2;     
+
+// Bookmark Global Variables
+let bookmarkedJobs = []; 
+const jobCards = document.querySelectorAll(".job-card");
+// ======================================
+// SHARE DATA MANAGER
+// ======================================
+
+let currentShareData = null;
+  
+  
+  </script>
+ 
+  
+<script>
+  
+  
   // ======================================
 // 6. FINAL INITIALIZATION (Single DOMContentLoaded)
 // ======================================
@@ -1437,6 +1505,10 @@ window.addEventListener("DOMContentLoaded", () => {
     updateBookmarkIcons();
     applySearchFilters(); // इनिशियली डेटा को रेंडर और फ़िल्टर करने के लिए
 });
+  
+  
+  
+  
   
 const menuBtn = document.getElementById("menuBtn");
 const closeMenu = document.getElementById("closeMenu");
@@ -1644,64 +1716,9 @@ window.addEventListener("resize",()=>{
 });
 </script>
   
-<!-- Live Search & Filters Logic -->
-<script>
-// ======================================
-// 1. GLOBAL VARIABLES & SELECTORS
-// ======================================
-
-// Hero Search Elements
-const jobSearch = document.getElementById("jobSearch");
-const heroCategory = document.getElementById("heroCategory");
-const heroState = document.getElementById("heroState");
-const heroSearchBtn = document.getElementById("heroSearchBtn");
-
-// Header Search Elements
-const headerSearch = document.getElementById("headerSearch");
-const headerSearchBtn = document.getElementById("headerSearchBtn");
-const headerSearchWrapper = document.getElementById("headerSearchWrapper");
-const headerSearchClose = document.getElementById("headerSearchClose");
-
-// Desktop Sidebar Filters
-const filterCategory = document.getElementById("filterCategory");
-const filterDepartment = document.getElementById("filterDepartment");
-const filterQualification = document.getElementById("filterQualification");
-const filterState = document.getElementById("filterState");
-const filterJobType = document.getElementById("filterJobType");
-const filterSalary = document.getElementById("filterSalary");
-const filterLastDate = document.getElementById("filterLastDate");
-
-const applyFilters = document.getElementById("applyFilters");
-const resetFilters = document.getElementById("resetFilters");
-const activeFilterCount = document.getElementById("activeFilterCount");
-
-// Mobile Drawer Filters
-const mobileFilterCategory = document.getElementById("mobileFilterCategory");
-const mobileFilterDepartment = document.getElementById("mobileFilterDepartment");
-const mobileFilterQualification = document.getElementById("mobileFilterQualification");
-const mobileFilterState = document.getElementById("mobileFilterState");
-const mobileFilterJobType = document.getElementById("mobileFilterJobType");
-const mobileFilterSalary = document.getElementById("mobileFilterSalary");
-const mobileFilterLastDate = document.getElementById("mobileFilterLastDate");
-
-const mobileApplyFilters = document.getElementById("mobileApplyFilters");
-const mobileResetFilters = document.getElementById("mobileResetFilters");
-
-// Core Logic & Pagination Variables
-let allJobs = [];
-let filteredJobs = [];
-let debounceTimer;
-let currentPage = 1;        
-const cardsPerPage = 2;     
-
-// Bookmark Global Variables
-let bookmarkedJobs = []; 
-const jobCards = document.querySelectorAll(".job-card");
-// ======================================
-// SHARE DATA MANAGER
-// ======================================
-
-let currentShareData = null;
+ 
+  
+  <script>
 
 // ======================================
 // 2. SEARCH & DATA FUNCTIONS
@@ -1780,7 +1797,15 @@ function setupBookmarkButtons() {
     document.getElementById("shareMenu");
   const shareMenuClose =
     document.getElementById("shareMenuClose");
-function setupShareButtons() {
+
+  
+  
+  const shareMenuOverlay =
+    document.getElementById("shareMenuOverlay");
+  
+  
+  
+  function setupShareButtons() {
 
     const shareButtons =
         document.querySelectorAll(".shareBtn");
@@ -1940,6 +1965,15 @@ if (shareCopy) {
   if (shareMenuClose) {
 
     shareMenuClose.addEventListener("click", () => {
+
+        shareMenu.classList.add("hidden");
+
+    });
+
+}
+  if (shareMenuOverlay) {
+
+    shareMenuOverlay.addEventListener("click", () => {
 
         shareMenu.classList.add("hidden");
 
@@ -2453,3 +2487,4 @@ window.addEventListener("scroll", () => {
 
 </body>
 </html>
+
