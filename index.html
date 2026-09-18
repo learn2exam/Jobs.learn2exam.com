@@ -1472,10 +1472,11 @@ function isMobileSearch() {
 }
 
 
+  
+  // --------------------------------------
+// Hide Header Search UI
 // --------------------------------------
-// Close Header Search
-// --------------------------------------
-function closeHeaderSearch() {
+function hideHeaderSearchUI() {
 
     if (!isMobileSearch()) return;
 
@@ -1492,15 +1493,44 @@ function closeHeaderSearch() {
 
     headerSearchBtn.classList.remove("hidden");
     headerSearchClose.classList.add("hidden");
-
-    if (headerSearch) {
-    headerSearch.value = "";
 }
+  
+  
+  
+  // --------------------------------------
+// Clear Search
+// --------------------------------------
+function clearSearch() {
 
+    AppState.searchKeyword = "";
+    AppState.currentPage = 1;
+
+    saveAppState();
+
+    // AppState → DOM
     syncStateToInputs();
+
+    // Apply cleared search
     applySearchFilters();
 }
-    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
     
 function syncFilterInputs(source) {
     if (source === 'desktop') {
@@ -2606,12 +2636,12 @@ if (headerSearchClose) {
 
     headerSearchClose.addEventListener("click", () => {
 
-        closeHeaderSearch();
+        hideHeaderSearchUI();
+        clearSearch();
 
     });
 
 }
-
 
 // --------------------------------------
 // Escape Key — Header Search
@@ -2627,19 +2657,44 @@ document.addEventListener("keydown", (e) => {
         !headerSearchWrapper.classList.contains("hidden")
     ) {
 
-        closeHeaderSearch();
+        hideHeaderSearchUI();
 
     }
 
 });
     
+     
+     
+     
+     // --------------------------------------
+// Outside Click — Header Search
+// --------------------------------------
 document.addEventListener("click", (e) => {
+
     if (!isMobileSearch()) return;
-    if (headerSearchWrapper.classList.contains("hidden")) return;
-    const insideSearch = headerSearchWrapper.contains(e.target);
-    const clickButton = headerSearchBtn && headerSearchBtn.contains(e.target);
-    if (insideSearch || clickButton) return; 
-    closeHeaderSearch();
+
+    if (
+        !headerSearchWrapper ||
+        headerSearchWrapper.classList.contains("hidden")
+    ) {
+        return;
+    }
+
+    const insideSearch =
+        headerSearchWrapper.contains(e.target);
+
+    const clickButton =
+        headerSearchBtn &&
+        headerSearchBtn.contains(e.target);
+
+    // Search UI / Search Button के अंदर click
+    if (insideSearch || clickButton) {
+        return;
+    }
+
+    // Outside Click → केवल UI hide
+    hideHeaderSearchUI();
+
 });
     
     
