@@ -1430,11 +1430,14 @@ function renderJobCard(job) {
 }
   
   
-  // ======================================
-// E2-1G-7 — HEADER MOBILE SEARCH
-// OPEN / CLOSE / ENTER / ESCAPE
+// ======================================
+// SEARCH MODULE
+// Production-Level Search Architecture
 // ======================================
 
+// --------------------------------------
+// Mobile Search Detection
+// --------------------------------------
 function isMobileSearch() {
     return window.innerWidth < 768;
 }
@@ -1442,8 +1445,9 @@ function isMobileSearch() {
 
 // --------------------------------------
 // Open Header Search
+// UI Responsibility Only
 // --------------------------------------
-  function openHeaderSearch() {
+function openHeaderSearch() {
 
     if (!isMobileSearch()) return;
 
@@ -1472,9 +1476,14 @@ function isMobileSearch() {
 }
 
 
-  
-  // --------------------------------------
+// --------------------------------------
 // Hide Header Search UI
+// UI Responsibility ONLY
+//
+// IMPORTANT:
+// AppState.searchKeyword को touch नहीं करता.
+// Search inputs को clear नहीं करता.
+// Search results को reset नहीं करता.
 // --------------------------------------
 function hideHeaderSearchUI() {
 
@@ -1494,23 +1503,26 @@ function hideHeaderSearchUI() {
     headerSearchBtn.classList.remove("hidden");
     headerSearchClose.classList.add("hidden");
 }
-  
-  
-  
-  // --------------------------------------
+
+
+// --------------------------------------
 // Clear Search
+// State Responsibility
+//
+// X Button इसी function को use करेगा.
 // --------------------------------------
 function clearSearch() {
 
     AppState.searchKeyword = "";
     AppState.currentPage = 1;
 
+    // Persist Central State
     saveAppState();
 
     // AppState → DOM
     syncStateToInputs();
 
-    // Apply cleared search
+    // Apply Central State
     applySearchFilters();
 }
   
@@ -1694,8 +1706,12 @@ function syncStateToInputs() {
         "E2-2A-5B — AppState → DOM synchronized"
     );
 } 
+  
+  
+  
     // ======================================
-// E2-2A-3 — CENTRAL SEARCH STATE
+// CENTRAL SEARCH STATE
+// DOM → AppState → DOM
 // ======================================
 function handleSearchInput(source) {
 
@@ -1712,21 +1728,8 @@ function handleSearchInput(source) {
     AppState.searchKeyword =
         input.value.trim().toLowerCase();
 
+    // Search change → first page
     AppState.currentPage = 1;
-
-    // ----------------------------------
-    // AppState → Search Inputs
-    // ----------------------------------
-    const searchValue =
-        AppState.searchKeyword || "";
-
-    if (jobSearch) {
-        jobSearch.value = searchValue;
-    }
-
-    if (headerSearch) {
-        headerSearch.value = searchValue;
-    }
 
     // ----------------------------------
     // Persist Central State
@@ -1734,7 +1737,12 @@ function handleSearchInput(source) {
     saveAppState();
 
     // ----------------------------------
-    // Apply Central State
+    // AppState → DOM
+    // ----------------------------------
+    syncStateToInputs();
+
+    // ----------------------------------
+    // Central Search Pipeline
     // ----------------------------------
     applySearchFilters();
 }
@@ -2554,18 +2562,25 @@ window.addEventListener("resize", () => {
     
     
     // Global Event Triggers Sync
-
+</script>
+  
+  
+  <script>
+    
+    
     // ======================================
-// E2-1G-7 — HEADER SEARCH EVENT COORDINATION
+// HEADER + HERO SEARCH EVENTS
 // ======================================
 
 // --------------------------------------
-// Job Search Input
+// Hero / Main Search Input
 // --------------------------------------
 if (jobSearch) {
 
     jobSearch.addEventListener("input", () => {
+
         handleSearchInput("job");
+
     });
 
 }
@@ -2577,14 +2592,16 @@ if (jobSearch) {
 if (headerSearch) {
 
     headerSearch.addEventListener("input", () => {
+
         handleSearchInput("header");
+
     });
 
 }
 
 
 // --------------------------------------
-// Header Search — Enter Key
+// Header Search — Enter
 // --------------------------------------
 if (headerSearch) {
 
@@ -2610,19 +2627,21 @@ if (headerSearchBtn) {
 
         if (isMobileSearch()) {
 
+            // Prevent document-level
+            // outside-click handler
             e.stopPropagation();
 
             openHeaderSearch();
 
-        } else {
-
-            if (headerSearch) {
-                headerSearch.focus();
-            }
-
-            applySearchFilters();
-
+            return;
         }
+
+        // Desktop
+        if (headerSearch) {
+            headerSearch.focus();
+        }
+
+        applySearchFilters();
 
     });
 
@@ -2630,21 +2649,26 @@ if (headerSearchBtn) {
 
 
 // --------------------------------------
-// Header Search Close Button
+// Header Search — X Button
 // --------------------------------------
 if (headerSearchClose) {
 
-    headerSearchClose.addEventListener("click", () => {
+    headerSearchClose.addEventListener("click", (e) => {
+
+        e.stopPropagation();
 
         hideHeaderSearchUI();
+
         clearSearch();
 
     });
 
 }
 
+
 // --------------------------------------
-// Escape Key — Header Search
+// Header Search — ESC
+// UI Hide ONLY
 // --------------------------------------
 document.addEventListener("keydown", (e) => {
 
@@ -2662,12 +2686,11 @@ document.addEventListener("keydown", (e) => {
     }
 
 });
-    
-     
-     
-     
-     // --------------------------------------
-// Outside Click — Header Search
+
+
+// --------------------------------------
+// Header Search — Outside Click
+// UI Hide ONLY
 // --------------------------------------
 document.addEventListener("click", (e) => {
 
@@ -2687,12 +2710,14 @@ document.addEventListener("click", (e) => {
         headerSearchBtn &&
         headerSearchBtn.contains(e.target);
 
-    // Search UI / Search Button के अंदर click
+    // Search UI या Search Button के अंदर
+    // click हुआ तो outside click नहीं है.
     if (insideSearch || clickButton) {
         return;
     }
 
-    // Outside Click → केवल UI hide
+    // Outside Click
+    // केवल UI hide होगा.
     hideHeaderSearchUI();
 
 });
@@ -2701,9 +2726,47 @@ document.addEventListener("click", (e) => {
     
     
     
+    
+    
+    
+    
+    
+    
+  </script> 
      
-     // ======================================
-// E2-1G-8 — RESIZE EVENT CLEANUP
+     
+     <script>
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+    
+    
+     
+// ======================================
+// HEADER SEARCH — RESIZE SAFETY
 // ======================================
 
 let lastViewportWidth = window.innerWidth;
@@ -2712,9 +2775,9 @@ window.addEventListener("resize", () => {
 
     const currentWidth = window.innerWidth;
 
-    // Width नहीं बदली तो यह केवल
-    // mobile keyboard / visual viewport resize
-    // हो सकता है — UI state को मत बदलो.
+    // Width नहीं बदली:
+    // mobile keyboard / height-only resize
+    // को ignore करो.
     if (currentWidth === lastViewportWidth) {
         return;
     }
@@ -2758,14 +2821,40 @@ window.addEventListener("resize", () => {
         headerSearchClose.classList.add("hidden");
     }
 
-});
-     
+}); 
+       
+       
+ 
+       
+       
+       
+       
+       
+// ======================================
+// INITIAL HEADER SEARCH UI
+// ======================================
+
 if (isMobileSearch()) {
-    headerSearchWrapper.classList.add("hidden");
-    headerSearchClose.classList.add("hidden");
-}else {headerSearchWrapper.classList.remove("hidden");
-headerSearchWrapper.classList.add("md:block");
+
+    if (headerSearchWrapper) {
+        headerSearchWrapper.classList.add("hidden");
+    }
+
+    if (headerSearchClose) {
+        headerSearchClose.classList.add("hidden");
+    }
+
+} else {
+
+    if (headerSearchWrapper) {
+        headerSearchWrapper.classList.remove("hidden");
+        headerSearchWrapper.classList.add("md:block");
+    }
+
 }
+       
+       
+       
     
     // ======================================
 // DESKTOP APPLY FILTERS
@@ -2879,28 +2968,46 @@ if (emptyResetBtn) {
      
      
      
-     
-     if (heroSearchBtn) {
+     // ======================================
+// HERO SEARCH BUTTON
+// ======================================
+if (heroSearchBtn) {
 
     heroSearchBtn.addEventListener("click", (e) => {
 
         e.preventDefault();
 
-        // Hero DOM → Central State
+        // ----------------------------------
+        // Hero Filters → AppState
+        // ----------------------------------
         AppState.filters.heroCategory =
-       heroCategory ? heroCategory.value : "";
+            heroCategory?.value || "";
 
         AppState.filters.heroState =
-            heroState ? heroState.value : "";
+            heroState?.value || "";
 
-
+        // ----------------------------------
+        // Search Action → First Page
+        // ----------------------------------
         AppState.currentPage = 1;
 
+        // ----------------------------------
+        // Persist Central State
+        // ----------------------------------
         saveAppState();
 
-        // Apply Central State
+        // ----------------------------------
+        // AppState → DOM
+        // ----------------------------------
+        syncStateToInputs();
+
+        // ----------------------------------
+        // Central Search Pipeline
+        // ----------------------------------
         applySearchFilters();
+
     });
+
 }
      
      
@@ -3149,3 +3256,4 @@ window.addEventListener("DOMContentLoaded", () => {
   
 </body>
 </html>
+
