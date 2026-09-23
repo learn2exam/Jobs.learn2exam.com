@@ -30,8 +30,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"/>
     
   <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
+  <script src="https://cdn.tailwindcss.com"></script>  <script>
       tailwind.config = {
           darkMode: 'class',
           theme: {
@@ -215,38 +214,1050 @@
           outline:none;
           box-shadow:0 0 0 3px rgba(37,99,235,.35);
       }
+    
+    
+    
+    
+    
+    
+    
+    
   </style>
+  
+  📍📍📍📍📍📍📍📍✅✅✅✅✅✅
+  
+  
+  
+  <style>
+    
+  
+  
+  /* =========================================================
+   F-3.1 — FOOTER BASE
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   Footer Base Styling
+   --------------------------------------------------------- */
+
+#siteFooter {
+    /* Page-level element */
+    display: block;
+
+    /* Existing project visual language */
+    font-family: Poppins, sans-serif;
+
+    /* Independent presentation boundary */
+    width: 100%;
+
+    /* Background foundation */
+    background-color: #ffffff;
+
+    /* Predictable box model */
+    box-sizing: border-box;
+
+    /* Normal document flow */
+    position: static;
+
+    /* Prevent accidental horizontal overflow */
+    overflow-x: hidden;
+}
 
 
+/* ---------------------------------------------------------
+   Footer Box Model
+   --------------------------------------------------------- */
+
+#siteFooter,
+#siteFooter *,
+#siteFooter *::before,
+#siteFooter *::after {
+    box-sizing: border-box;
+}
 
 
+/* ---------------------------------------------------------
+   Footer Dark Theme Foundation
+   --------------------------------------------------------- */
+
+.dark #siteFooter {
+    background-color: #0f172a;
+}
+
+
+/* =========================================================
+   END — F-3.1 FOOTER BASE
+   ========================================================= */
+  
+  
+   /* =========================================================
+    F-3.2 — FOOTER CONTAINER ALIGNMENT
+    ========================================================= */
+
+/*
+ * Footer के सभी मुख्य content sections को
+ * existing project container system के साथ align किया जाएगा.
+ *
+ * Reference:
+ * max-w-7xl
+ * mx-auto
+ * px-4
+ */
+
+
+/* ---------------------------------------------------------
+   Footer Main Content Container
+   --------------------------------------------------------- */
+
+#siteFooter > .footer-container {
+    width: 100%;
+    max-width: 80rem; /* Tailwind max-w-7xl */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+
+/* ---------------------------------------------------------
+   Footer Container Box Model
+   --------------------------------------------------------- */
+
+#siteFooter > .footer-container {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   END — F-3.2 FOOTER CONTAINER ALIGNMENT
+   ========================================================= */
+  
+  
+  
+  
+  /* =========================================================
+   F-3.3 — FOOTER SECTIONS LAYOUT
+   ========================================================= */
+
+/*
+ * Footer sections layout foundation.
+ *
+ * Scope:
+ * - Branding
+ * - Navigation sections
+ * - Newsletter
+ *
+ * Typography, links, branding visuals,
+ * bottom bar and theme refinement
+ * will be handled in their respective F-3.x stages.
+ */
+
+
+/* =========================================================
+   F-3.3.1 — Footer Container Layout
+   ========================================================= */
+
+.footer-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+
+/* =========================================================
+   F-3.3.2 — Branding Section
+   ========================================================= */
+
+#footerBranding {
+    width: 100%;
+}
+
+
+/* =========================================================
+   F-3.3.3 — Navigation Sections
+   ========================================================= */
+
+#footerGovernmentJobs,
+#footerExamResources,
+#footerImportantLinks,
+#footerLegal {
+    width: 100%;
+}
+
+
+/* =========================================================
+   F-3.3.4 — Navigation List Structure
+   ========================================================= */
+
+#footerGovernmentJobs ul,
+#footerExamResources ul,
+#footerImportantLinks ul,
+#footerLegal ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+
+/* =========================================================
+   F-3.3.5 — Newsletter Section
+   ========================================================= */
+
+#footerNewsletter {
+    width: 100%;
+}
+
+
+/* =========================================================
+   F-3.3.6 — Newsletter Form Layout
+   ========================================================= */
+
+#footerNewsletterForm {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+
+/* =========================================================
+   F-3.3.7 — Desktop Sections Layout
+   ========================================================= */
+
+@media (min-width: 1024px) {
+
+    .footer-container {
+        grid-template-columns:
+            minmax(0, 1.5fr)
+            repeat(4, minmax(0, 1fr))
+            minmax(0, 1.25fr);
+
+        align-items: start;
+    }
+
+}
+
+
+/* =========================================================
+   F-3.3.8 — Tablet Sections Layout
+   ========================================================= */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+
+    .footer-container {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        align-items: start;
+    }
+
+    #footerBranding {
+        grid-column: 1 / -1;
+    }
+
+    #footerNewsletter {
+        grid-column: 1 / -1;
+    }
+
+}
+
+
+/* =========================================================
+   F-3.3.9 — Mobile Sections Layout
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+
+    #footerBranding,
+    #footerGovernmentJobs,
+    #footerExamResources,
+    #footerImportantLinks,
+    #footerLegal,
+    #footerNewsletter {
+        width: 100%;
+    }
+
+}
+  
+  /* =========================================================
+   F-3.4 — FOOTER TYPOGRAPHY
+   ========================================================= */
+
+/* Footer Section Headings */
+#siteFooter h2 {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Footer Brand Name */
+#siteFooter .footer-brand-name {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+}
+
+/* Footer Brand Tagline */
+#siteFooter .footer-brand-tagline {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Footer Brand Description */
+#siteFooter .footer-brand-description {
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* Footer Navigation Lists */
+#siteFooter nav ul {
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+}
+
+/* Footer Newsletter Description */
+#siteFooter #footerNewsletter p {
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* Newsletter Label */
+#siteFooter #footerNewsletter label {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+}
+
+/* Newsletter Input */
+#siteFooter #footerNewsletter input {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+/* Newsletter Subscribe Button */
+#siteFooter #footerNewsletter button {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+}
+
+/* Social Media Placeholder Text */
+#siteFooter .footer-social-placeholder-text {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+}
+
+/* Footer Bottom Bar Typography */
+#siteFooter #footerBottomBar p {
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* =========================================================
+   END — F-3.4 TYPOGRAPHY
+   ========================================================= */
+  
+  /* =========================================================
+   F-3.5 — FOOTER LINKS & INTERACTIVE STATES
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   Footer Navigation Links — Base
+   --------------------------------------------------------- */
+
+#siteFooter nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#siteFooter nav li {
+    margin: 0;
+    padding: 0;
+}
+
+#siteFooter nav a {
+    display: inline-flex;
+    align-items: center;
+
+    text-decoration: none;
+
+    color: inherit;
+
+    transition:
+        color 0.2s ease,
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/* ---------------------------------------------------------
+   Footer Navigation Links — Hover
+   --------------------------------------------------------- */
+
+#siteFooter nav a:hover {
+    text-decoration: none;
+    opacity: 0.85;
+}
+
+
+/* ---------------------------------------------------------
+   Footer Navigation Links — Focus
+   Keyboard accessibility
+   --------------------------------------------------------- */
+
+#siteFooter nav a:focus-visible,
+#siteFooter > .footer-container a:focus-visible,
+#siteFooter #footerBottomBar a:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+
+/* ---------------------------------------------------------
+   Footer Navigation Links — Active
+   --------------------------------------------------------- */
+
+#siteFooter nav a:active {
+    opacity: 0.7;
+}
+
+
+/* ---------------------------------------------------------
+   Footer Brand Link
+   --------------------------------------------------------- */
+
+#siteFooter #footerBranding > .flex a {
+    text-decoration: none;
+}
+
+#siteFooter #footerBranding > .flex a:hover {
+    text-decoration: none;
+    opacity: 0.9;
+}
+
+
+/* ---------------------------------------------------------
+   Footer Bottom Bar Links
+   --------------------------------------------------------- */
+
+#siteFooter #footerBottomBar a {
+    text-decoration: none;
+}
+
+#siteFooter #footerBottomBar a:hover {
+    text-decoration: none;
+    opacity: 0.85;
+}
+
+
+/* ---------------------------------------------------------
+   Disabled Newsletter Controls
+   Future Feature — No Functionality Yet
+   --------------------------------------------------------- */
+
+#siteFooter #footerNewsletter input:disabled,
+#siteFooter #footerNewsletter button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+#siteFooter #footerNewsletter button:disabled:hover {
+    opacity: 0.6;
+    transform: none;
+}
+
+
+/* ---------------------------------------------------------
+   Reduced Motion
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    #siteFooter nav a,
+    #siteFooter #footerBranding > .flex a,
+    #siteFooter #footerBottomBar a {
+        transition: none;
+    }
+
+}
+  
+  
+  /* =========================================================
+   F-3.6 — FOOTER BRANDING
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   F-3.6.1 — Branding Section
+   --------------------------------------------------------- */
+
+#footerBranding {
+    width: 100%;
+}
+
+
+/* ---------------------------------------------------------
+   F-3.6.2 — Logo + Brand Identity
+   --------------------------------------------------------- */
+
+#footerBranding > .flex {
+    display: flex;
+    align-items: center;
+}
+
+
+/* ---------------------------------------------------------
+   F-3.6.3 — Footer Logo
+   --------------------------------------------------------- */
+
+#footerBranding .footer-logo {
+    display: block;
+
+    width: 2.5rem;
+    height: 2.5rem;
+
+    object-fit: contain;
+
+    flex-shrink: 0;
+}
+
+
+/* ---------------------------------------------------------
+   F-3.6.4 — Brand Name
+   --------------------------------------------------------- */
+
+#footerBranding .footer-brand-name {
+    display: inline-block;
+
+    margin-left: 0.625rem;
+
+    white-space: nowrap;
+}
+
+
+/* ---------------------------------------------------------
+   F-3.6.5 — Portal Tagline
+   --------------------------------------------------------- */
+
+#footerBranding .footer-brand-tagline {
+    margin-top: 0.5rem;
+}
+
+
+/* ---------------------------------------------------------
+   F-3.6.6 — Brand Description
+   --------------------------------------------------------- */
+
+#footerBranding .footer-brand-description {
+    max-width: 32rem;
+
+    margin-top: 0.625rem;
+
+    overflow-wrap: break-word;
+}
+
+
+/* ---------------------------------------------------------
+   F-3.6.7 — Social Media Placeholder
+   --------------------------------------------------------- */
+
+#footerBranding .footer-social-placeholder {
+    display: flex;
+    align-items: center;
+
+    width: fit-content;
+
+    margin-top: 1rem;
+
+    min-height: 2rem;
+
+    padding: 0.375rem 0.75rem;
+
+    border: 1px dashed currentColor;
+    border-radius: 0.375rem;
+
+    opacity: 0.75;
+}
+
+
+/* ---------------------------------------------------------
+   F-3.6.8 — Social Placeholder Text
+   --------------------------------------------------------- */
+
+#footerBranding .footer-social-placeholder-text {
+    display: inline-block;
+
+    white-space: nowrap;
+}
+
+
+/* ---------------------------------------------------------
+   F-3.6.9 — Mobile Branding
+   --------------------------------------------------------- */
+
+@media (max-width: 767px) {
+
+    #footerBranding {
+        width: 100%;
+    }
+
+    #footerBranding .footer-brand-description {
+        max-width: none;
+    }
+
+    #footerBranding .footer-social-placeholder {
+        max-width: 100%;
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   F-3.6.10 — Small Screen Protection
+   --------------------------------------------------------- */
+
+@media (max-width: 360px) {
+
+    #footerBranding .footer-logo {
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+
+    #footerBranding .footer-brand-name {
+        margin-left: 0.5rem;
+        white-space: normal;
+    }
+
+}
+
+
+/* =========================================================
+   END — F-3.6 FOOTER BRANDING
+   ========================================================= */
+
+    /* =========================================================
+   F-3.7 — FOOTER BOTTOM BAR
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   F-3.7.1 — Bottom Bar Foundation
+   --------------------------------------------------------- */
+
+#footerBottomBar {
+    width: 100%;
+    margin-top: 2rem;
+    padding: 1rem 0;
+}
+
+
+/* ---------------------------------------------------------
+   F-3.7.2 — Bottom Bar Container
+   --------------------------------------------------------- */
+
+#footerBottomBar > .max-w-7xl {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 1rem;
+}
+
+
+/* ---------------------------------------------------------
+   F-3.7.3 — Copyright
+   --------------------------------------------------------- */
+
+#footerCopyright {
+    margin: 0;
+
+    overflow-wrap: break-word;
+}
+
+
+/* ---------------------------------------------------------
+   F-3.7.4 — Website Identity
+   --------------------------------------------------------- */
+
+#footerWebsiteIdentity {
+    margin: 0;
+
+    text-align: right;
+
+    overflow-wrap: break-word;
+}
+
+
+/* ---------------------------------------------------------
+   F-3.7.5 — Mobile Bottom Bar
+   --------------------------------------------------------- */
+
+@media (max-width: 767px) {
+
+    #footerBottomBar > .max-w-7xl {
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 0.5rem;
+    }
+
+    #footerWebsiteIdentity {
+        text-align: left;
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   F-3.7.6 — Small Screen Protection
+   --------------------------------------------------------- */
+
+@media (max-width: 360px) {
+
+    #footerBottomBar {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    #footerBottomBar > .max-w-7xl {
+        gap: 0.375rem;
+    }
+
+}
+
+
+/* =========================================================
+   END — F-3.7 FOOTER BOTTOM BAR
+   ========================================================= */
+    
+    /* =========================================================
+   F-3.8 — FOOTER THEME INTEGRATION & VISUAL REFINEMENT
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   F-3.8.1 — Footer Theme Foundation
+   --------------------------------------------------------- */
+
+#siteFooter {
+    color: #334155;
+    background-color: #f8fafc;
+}
+
+
+/* ---------------------------------------------------------
+   F-3.8.2 — Dark Theme
+   Existing Tailwind class-based dark mode
+   --------------------------------------------------------- */
+
+.dark #siteFooter {
+    color: #cbd5e1;
+    background-color: #0f172a;
+}
+
+
+/* ---------------------------------------------------------
+   F-3.8.3 — Footer Section Headings
+   --------------------------------------------------------- */
+
+#siteFooter h2 {
+    color: #0f172a;
+}
+
+.dark #siteFooter h2 {
+    color: #f8fafc;
+}
+
+
+/* ---------------------------------------------------------
+   F-3.8.4 — Footer Secondary Text
+   --------------------------------------------------------- */
+
+#siteFooter .footer-brand-tagline,
+#siteFooter .footer-brand-description,
+#siteFooter #footerNewsletter p {
+    color: #64748b;
+}
+
+.dark #siteFooter .footer-brand-tagline,
+.dark #siteFooter .footer-brand-description,
+.dark #siteFooter #footerNewsletter p {
+    color: #94a3b8;
+}
+
+
+/* ---------------------------------------------------------
+   F-3.8.5 — Social Placeholder Refinement
+   --------------------------------------------------------- */
+
+#siteFooter .footer-social-placeholder {
+    border-color: #94a3b8;
+}
+
+.dark #siteFooter .footer-social-placeholder {
+    border-color: #64748b;
+}
+
+
+/* ---------------------------------------------------------
+   F-3.8.6 — Bottom Bar Visual Separation
+   --------------------------------------------------------- */
+
+#siteFooter #footerBottomBar {
+    border-top: 1px solid #e2e8f0;
+}
+
+.dark #siteFooter #footerBottomBar {
+    border-top-color: #334155;
+}
+
+
+/* ---------------------------------------------------------
+   F-3.8.7 — Bottom Bar Text
+   --------------------------------------------------------- */
+
+#siteFooter #footerCopyright,
+#siteFooter #footerWebsiteIdentity {
+    color: #64748b;
+}
+
+.dark #siteFooter #footerCopyright,
+.dark #siteFooter #footerWebsiteIdentity {
+    color: #94a3b8;
+}
+
+
+/* ---------------------------------------------------------
+   F-3.8.8 — Newsletter Disabled State
+   Future feature remains visually inactive.
+   --------------------------------------------------------- */
+
+#siteFooter #footerNewsletter input:disabled,
+#siteFooter #footerNewsletter button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+
+/* ---------------------------------------------------------
+   F-3.8.9 — Small Screen Visual Protection
+   --------------------------------------------------------- */
+
+@media (max-width: 767px) {
+
+    #siteFooter {
+        overflow-x: hidden;
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   F-3.8.10 — Reduced Motion
+   Footer introduces no animation.
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    #siteFooter *,
+    #siteFooter *::before,
+    #siteFooter *::after {
+        scroll-behavior: auto;
+        transition: none;
+        animation: none;
+    }
+
+}
+
+
+/* =========================================================
+   END — F-3.8 THEME INTEGRATION & VISUAL REFINEMENT
+   ========================================================= */
+    
+    </style>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
+  
 </head>
   
   
@@ -687,6 +1698,603 @@
         </section>
     </div>
 </main> 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <footer id="siteFooter">
+
+    <div class="footer-container">
+  
+  
+  
+  <!-- =========================================================
+     F-2.1 — FOOTER BRANDING
+     ========================================================= -->
+
+<section
+    id="footerBranding"
+    aria-labelledby="footerBrandingTitle"
+    class="w-full"
+>
+
+    <!-- Logo + Brand Identity -->
+    <div class="flex items-center">
+
+        <!-- Logo -->
+        <a
+            href="index.html"
+            aria-label="Learn2Exam Home"
+            class="inline-flex items-center"
+        >
+            <img
+                src="assets/images/favicon.png"
+                alt="Learn2Exam Logo"
+                class="footer-logo"
+            >
+
+            <span
+                id="footerBrandingTitle"
+                class="footer-brand-name"
+            >
+                Learn2Exam
+            </span>
+        </a>
+
+    </div>
+
+
+    <!-- Portal Identity -->
+    <p class="footer-brand-tagline">
+        Government Job &amp; Exam Portal
+    </p>
+
+
+    <!-- Approved Description -->
+    <p class="footer-brand-description">
+        Latest Government Jobs, Admit Cards,
+        Results, Answer Keys, Syllabus और
+        Exam Updates एक जगह।
+    </p>
+
+
+    <!-- =====================================================
+         Future Social Media Icons Placeholder
+         ===================================================== -->
+    <div
+        id="footerSocialLinks"
+        class="footer-social-placeholder"
+        aria-label="Social Media Links"
+    >
+
+        <!--
+            Future Social Media Icons will be added here.
+
+            Planned:
+            - Telegram
+            - WhatsApp
+            - YouTube
+            - X / Twitter
+            - Other official social platforms
+
+            No social media URL or functionality is added yet.
+        -->
+
+        <span
+            class="footer-social-placeholder-text"
+            aria-hidden="true"
+        >
+            Social Media
+        </span>
+
+    </div>
+
+</section>
+
+<!-- =========================================================
+     END — F-2.1 FOOTER BRANDING
+     ========================================================= -->
+  
+  
+  
+  
+  <!-- =========================================================
+     F-2.2 — GOVERNMENT JOBS
+     ========================================================= -->
+
+<nav
+    id="footerGovernmentJobs"
+    aria-labelledby="footerGovernmentJobsTitle"
+>
+
+    <h2 id="footerGovernmentJobsTitle">
+        Government Jobs
+    </h2>
+
+    <ul>
+
+        <!-- Latest Jobs -->
+        <li>
+            <a href="latest-jobs.html">Latest Jobs</a>
+        </li>
+
+        <!-- All Government Jobs -->
+        <li>
+            <a href="all-jobs.html">All Government Jobs</a>
+        </li>
+
+        <!-- Central Government Jobs -->
+        <li>
+            <a href="central-government-jobs.html">Central Government Jobs</a>
+        </li>
+
+        <!-- State Government Jobs -->
+        <li>
+            <a href="state-government-jobs.html">State Government Jobs</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+<!-- =========================================================
+     END — F-2.2 GOVERNMENT JOBS
+     ========================================================= -->
+  
+  
+  
+  <!-- =========================================================
+     F-2.3 — EXAM RESOURCES
+     ========================================================= -->
+
+<nav
+    id="footerExamResources"
+    aria-labelledby="footerExamResourcesTitle"
+>
+
+    <h2 id="footerExamResourcesTitle">
+        Exam Resources
+    </h2>
+
+    <ul>
+
+        <!-- Admit Card -->
+        <li>
+            <a href="admit-card.html">
+                Admit Card
+            </a>
+        </li>
+
+        <!-- Results -->
+        <li>
+            <a href="results.html">
+                Results
+            </a>
+        </li>
+
+        <!-- Answer Key -->
+        <li>
+            <a href="answer-key.html">
+                Answer Key
+            </a>
+        </li>
+
+        <!-- Syllabus -->
+        <li>
+            <a href="syllabus.html">
+                Syllabus
+            </a>
+        </li>
+
+        <!-- Exam Calendar -->
+        <li>
+            <a href="exam-calendar.html">
+                Exam Calendar
+            </a>
+        </li>
+
+    </ul>
+
+</nav>
+
+<!-- =========================================================
+     END — F-2.3 EXAM RESOURCES
+     ========================================================= -->
+  
+  <!-- =========================================================
+     F-2.4 — IMPORTANT LINKS
+     ========================================================= -->
+
+<nav
+    id="footerImportantLinks"
+    aria-labelledby="footerImportantLinksTitle"
+>
+
+    <h2 id="footerImportantLinksTitle">
+        Important Links
+    </h2>
+
+    <ul>
+
+        <!-- Bookmarks -->
+        <li>
+            <a href="bookmarks.html">
+                Bookmarks
+            </a>
+        </li>
+
+        <!-- About Us
+             Route will be verified in F-2.8.
+             No dummy href is added. -->
+        <li>
+            <a href="about-us.html">About Us</a>
+        </li>
+
+        <!-- Contact Us
+             Route will be verified in F-2.8.
+             No dummy href is added. -->
+        <li>
+            <a href="contact-us.html">Contact Us</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+<!-- =========================================================
+     END — F-2.4 IMPORTANT LINKS
+     ========================================================= -->
+  
+  
+  <!-- =========================================================
+     F-2.5 — LEGAL & COMPLIANCE
+     ========================================================= -->
+
+<nav
+    id="footerLegal"
+    aria-labelledby="footerLegalTitle"
+>
+
+    <h2 id="footerLegalTitle">
+        Legal &amp; Compliance
+    </h2>
+
+    <ul>
+
+        <!-- Privacy Policy -->
+        <li>
+            <a href="privacy-policy.html">Privacy Policy</a>
+        </li>
+
+        <!-- Terms & Conditions -->
+        <li>
+            <a href="terms-and-conditions.html">Terms & Conditions</a>
+        </li>
+
+        <!-- Disclaimer -->
+        <li>
+            <a href="disclaimer.html">Disclaimer</a>
+        </li>
+
+        <!-- Cookie Policy -->
+        <li>
+            <a href="cookie-policy.html">Cookie Policy</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+<!-- =========================================================
+     END — F-2.5 LEGAL & COMPLIANCE
+     ========================================================= -->
+  
+  
+  
+  <!-- =========================================================
+     F-2.6 — NEWSLETTER / FUTURE FEATURE
+     ========================================================= -->
+
+<section
+    id="footerNewsletter"
+    aria-labelledby="footerNewsletterTitle"
+>
+
+    <h2 id="footerNewsletterTitle">
+        Get Latest Updates
+    </h2>
+
+    <p>
+        Government Jobs और Exam Updates
+        के लिए आगे चलकर Newsletter सुविधा।
+    </p>
+
+    <div id="footerNewsletterForm">
+
+        <label for="footerNewsletterEmail">
+            Email Address
+        </label>
+
+        <input
+            type="email"
+            id="footerNewsletterEmail"
+            name="email"
+            placeholder="Enter your email address"
+            autocomplete="email"
+            disabled
+        >
+
+        <button
+            type="button"
+            id="footerNewsletterSubscribe"
+            disabled
+        >
+            Subscribe
+        </button>
+
+    </div>
+
+</section>
+</div>
+<!-- =========================================================
+     END — F-2.6 NEWSLETTER / FUTURE FEATURE
+     ========================================================= -->
+  
+  
+  <!-- =========================================================
+     F-2.7 — FOOTER BOTTOM BAR
+     ========================================================= -->
+
+<div id="footerBottomBar">
+
+    <div class="max-w-7xl mx-auto px-4">
+
+        <!-- Copyright -->
+        <p id="footerCopyright">
+            © 2026 Learn2Exam. All rights reserved.
+        </p>
+
+        <!-- Website Identity -->
+        <p id="footerWebsiteIdentity">
+            Learn2Exam — Government Job &amp; Exam Portal
+        </p>
+
+    </div>
+
+</div>
+
+<!-- =========================================================
+     END — F-2.7 FOOTER BOTTOM BAR
+     ========================================================= -->
+  
+  
+  
+  
+  
+  </footer>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 <!-- 🔘Mobile Filter Drawer Backdrop -->
 <div id="filterOverlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden z-40"></div>
 
@@ -865,62 +2473,23 @@
 
 </div> 
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <script>
   
   // ======================================
@@ -3341,4 +4910,3 @@ window.addEventListener("DOMContentLoaded", () => {
   
 </body>
 </html>
-
