@@ -1498,19 +1498,37 @@
 </div>
 
           <!-- Pagination UI Element -->
-<div id="paginationContainer" class="flex items-center justify-center gap-2 mt-8 hidden">
-    <!-- Previous Button -->
-    <button id="prevPage" class="h-10 px-4 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium transition disabled:opacity-50 disabled:cursor-not-allowed">
-        <i class="fa-solid fa-chevron-left mr-1"></i> Previous
+
+<div id="paginationContainer"
+     class="flex items-center justify-center gap-2 mt-8 hidden">
+
+    <!-- Previous -->
+    <button
+        id="prevPage"
+        class="shrink-0 h-10 px-4 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium transition disabled:opacity-50 disabled:cursor-not-allowed">
+        <i class="fa-solid fa-chevron-left mr-1"></i>
+        Previous
     </button>
 
-    <!-- Dynamic Page Numbers Container -->
-    <div id="pageNumbers" class="flex items-center gap-2"></div>
+    <!-- Scrollable Page Numbers -->
+    <div
+        class="min-w-0 max-w-full overflow-x-auto scrollbar-hide">
+        
+        <div
+            id="pageNumbers"
+            class="flex items-center gap-2 w-max">
+        </div>
 
-    <!-- Next Button -->
-    <button id="nextPage" class="h-10 px-4 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium transition disabled:opacity-50 disabled:cursor-not-allowed">
-        Next <i class="fa-solid fa-chevron-right ml-1"></i>
+    </div>
+
+    <!-- Next -->
+    <button
+        id="nextPage"
+        class="shrink-0 h-10 px-4 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium transition disabled:opacity-50 disabled:cursor-not-allowed">
+        Next
+        <i class="fa-solid fa-chevron-right ml-1"></i>
     </button>
+
 </div>
 
           
@@ -1939,7 +1957,7 @@
         </button>
     </div>
 
-    <div class="flex-1 min-h-0 overflow-y-auto p-5 space-y-6 pb-8">
+   <div class="flex-1 min-h-0 overflow-y-auto p-5 space-y-6 pb-8">
         <div>
             <label class="block text-sm font-semibold mb-2">Category</label>
             <select id="mobileFilterCategory" class="w-full h-11 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-4">
@@ -2109,3 +2127,4 @@
   
 </body>
 </html>
+
