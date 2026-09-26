@@ -122,7 +122,7 @@ const scrollProgress       = getElement("scrollProgress");
 // --------------------------------------
 let allJobs = [];
 let debounceTimer;
-const CARDS_PER_PAGE = 2;
+const CARDS_PER_PAGE = 10;
 
 // ======================================
 // App Initialization
