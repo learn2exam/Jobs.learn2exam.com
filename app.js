@@ -128,19 +128,13 @@ const CARDS_PER_PAGE = 2;
 // App Initialization
 // ======================================
 function initializeApp() {
-
-    // 1. Saved AppState load
     restoreAppState();
-
-    // 2. Central State → DOM Inputs
     syncStateToInputs();
 
-    // 3. Bookmarks
     loadBookmarks();
     setupBookmarkButtons();
     updateBookmarkIcons();
 
-    // 4. Apply saved filters
     applySearchFilters();
 }
 
@@ -154,14 +148,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 // ======================================
-// Fetch Job Data from JSON
+// Fetch Job Data
 // ======================================
 fetch('assets/data/jobs.json')
     .then(response => {
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-
         return response.json();
     })
     .then(data => {
@@ -169,9 +162,8 @@ fetch('assets/data/jobs.json')
         initializeApp();
     })
     .catch(error => {
-        console.error('Error loading JSON:', error);
+        console.error("Error loading JSON:", error);
     });
-
 
 
 
