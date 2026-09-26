@@ -113,8 +113,7 @@ const jobCount             = getElement("jobCount");
 const scrollProgress       = getElement("scrollProgress");
   
   
-  
-// ======================================
+  // ======================================
 // 2. CORE APPLICATION VARIABLES
 // ======================================
 
@@ -125,7 +124,27 @@ let allJobs = [];
 let debounceTimer;
 const CARDS_PER_PAGE = 2;
 
+// --------------------------------------
+// Fetch Job Data from JSON
+// --------------------------------------
+fetch('assets/data/jobs.json')
+  .then(response => response.json())
+  .then(data => {
+    allJobs = data; // JSON डेटा को allJobs वेरिएबल में स्टोर करें
     
+    // अगर आपके पास जॉब्स रेंडर/डिस्प्ले करने का फंक्शन है (जैसे initApp() या renderJobs()):
+    // initApp();
+  })
+  .catch(error => console.error('Error loading JSON:', error));
+
+
+
+
+
+
+
+
+
     
     const JOB_DATA = [
     {
