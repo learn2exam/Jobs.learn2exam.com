@@ -132,18 +132,15 @@ function initializeApp() {
     // 1. Saved AppState load
     restoreAppState();
 
-    // 2. Job data से search data तैयार
-   // buildSearchData();
-
-    // 3. Central State → DOM Inputs
+    // 2. Central State → DOM Inputs
     syncStateToInputs();
 
-    // 4. Bookmarks
+    // 3. Bookmarks
     loadBookmarks();
     setupBookmarkButtons();
     updateBookmarkIcons();
 
-    // 5. Apply saved filters
+    // 4. Apply saved filters
     applySearchFilters();
 }
 
