@@ -125,17 +125,35 @@ let debounceTimer;
 const CARDS_PER_PAGE = 2;
 
 // --------------------------------------
+// App Initialization
+// --------------------------------------
+function initializeApp() {
+    restoreAppState();
+    syncStateToInputs();
+    loadBookmarks();
+    setupBookmarkButtons();
+    updateBookmarkIcons();
+    applySearchFilters();
+}
+
+// --------------------------------------
 // Fetch Job Data from JSON
 // --------------------------------------
 fetch('assets/data/jobs.json')
-  .then(response => response.json())
-  .then(data => {
-    allJobs = data; // JSON डेटा को allJobs वेरिएबल में स्टोर करें
-    
-    // अगर आपके पास जॉब्स रेंडर/डिस्प्ले करने का फंक्शन है (जैसे initApp() या renderJobs()):
-    // initApp();
-  })
-  .catch(error => console.error('Error loading JSON:', error));
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        allJobs = data;
+        initializeApp();
+    })
+    .catch(error => {
+        console.error('Error loading JSON:', error);
+    });
+
 
 
 
