@@ -133,7 +133,7 @@ function initializeApp() {
     restoreAppState();
 
     // 2. Job data से search data तैयार
-    buildSearchData();
+   // buildSearchData();
 
     // 3. Central State → DOM Inputs
     syncStateToInputs();
@@ -1640,7 +1640,7 @@ if (themeBtn) {
     });
 }
 
-loadTheme();
+// loadTheme();
     
 // ======================================
 // MOBILE MENU EVENTS
@@ -2334,34 +2334,6 @@ window.addEventListener("resize", () => {
      
      
      
-     
-// ======================================
-// FINAL INITIALIZATION
-// ======================================
-
-//    window.addEventListener("DOMContentLoaded", () => {
-
-    // 1. Saved AppState load
-   // restoreAppState();
-
-    // 2. Job Data → allJobs
- //    buildSearchData();
-
-    // 3. Central State → DOM Inputs
- //   syncStateToInputs();
-
-    // 4. Bookmarks
- //   loadBookmarks();
- //   setupBookmarkButtons();
-//    updateBookmarkIcons();
-  
-    // 5. Apply saved filters
-//    applySearchFilters();
-
- //    });
-  
-  
-    
     
   
       
