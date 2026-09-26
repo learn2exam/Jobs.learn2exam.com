@@ -1,1 +1,106 @@
-
+[
+  {
+    "id": "1",
+    "title": "SSC CGL Recruitment 2026",
+    "category": "Latest Jobs",
+    "department": "SSC",
+    "qualification": "Graduate",
+    "state": "All India",
+    "jobtype": "Permanent",
+    "salary": 50000,
+    "lastdate": "2026-08-25",
+    "posts": 14582,
+    "status": "New"
+  },
+  {
+    "id": "2",
+    "title": "Railway Group D Recruitment 2026",
+    "category": "Latest Jobs",
+    "department": "Railway",
+    "qualification": "10th Pass",
+    "state": "All India",
+    "jobtype": "Permanent",
+    "salary": 32000,
+    "lastdate": "2026-09-15",
+    "posts": 32000,
+    "status": "New"
+  },
+  {
+    "id": "3",
+    "title": "SBI Clerk Admit Card 2026",
+    "category": "Admit Card",
+    "department": "SBI",
+    "qualification": "Graduate",
+    "state": "All India",
+    "jobtype": "Admit Card",
+    "salary": 0,
+    "lastdate": "2026-10-12",
+    "posts": 0,
+    "status": "Available"
+  },
+  {
+    "id": "4",
+    "title": "UPSC Civil Services Result 2026",
+    "category": "Results",
+    "department": "UPSC",
+    "qualification": "Graduate",
+    "state": "All India",
+    "jobtype": "Result",
+    "salary": 0,
+    "lastdate": "2026-07-17",
+    "posts": 1200,
+    "status": "Published"
+  },
+  {
+    "id": "5",
+    "title": "SSC CGL Recruitment 2026",
+    "category": "Latest Jobs",
+    "department": "SSC",
+    "qualification": "Graduate",
+    "state": "Delhi",
+    "jobtype": "Permanent",
+    "salary": 45000,
+    "lastdate": "2026-08-20",
+    "posts": 8500,
+    "status": "New"
+  },
+  {
+    "id": "6",
+    "title": "Railway RPF Constable Vacancy 2026",
+    "category": "Latest Jobs",
+    "department": "Railway",
+    "qualification": "10th Pass",
+    "state": "All India",
+    "jobtype": "Permanent",
+    "salary": 21700,
+    "lastdate": "2026-09-05",
+    "posts": 4200,
+    "status": "New"
+  },
+  {
+    "id": "7",
+    "title": "UP Police Sub Inspector (SI)",
+    "category": "Latest Jobs",
+    "department": "Police",
+    "qualification": "Graduate",
+    "state": "Uttar Pradesh",
+    "jobtype": "Permanent",
+    "salary": 35400,
+    "lastdate": "2026-08-15",
+    "posts": 950,
+    "status": "New"
+  },
+  {
+    "id": "8",
+    "title": "Indian Army Agniveer GD",
+    "category": "Latest Jobs",
+    "department": "Defence",
+    "qualification": "10th Pass",
+    "state": "All India",
+    "jobtype": "Permanent",
+    "salary": 30000,
+    "lastdate": "2026-08-30",
+    "posts": 25000,
+    "status": "New"
+  }
+]
