@@ -124,26 +124,47 @@ let allJobs = [];
 let debounceTimer;
 const CARDS_PER_PAGE = 2;
 
-// --------------------------------------
+// ======================================
 // App Initialization
-// --------------------------------------
+// ======================================
 function initializeApp() {
+
+    // 1. Saved AppState load
     restoreAppState();
+
+    // 2. Job data से search data तैयार
+    buildSearchData();
+
+    // 3. Central State → DOM Inputs
     syncStateToInputs();
+
+    // 4. Bookmarks
     loadBookmarks();
     setupBookmarkButtons();
     updateBookmarkIcons();
+
+    // 5. Apply saved filters
     applySearchFilters();
 }
 
-// --------------------------------------
+
+// ======================================
+// DOM Ready
+// ======================================
+window.addEventListener("DOMContentLoaded", () => {
+    loadTheme();
+});
+
+
+// ======================================
 // Fetch Job Data from JSON
-// --------------------------------------
+// ======================================
 fetch('assets/data/jobs.json')
     .then(response => {
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
+
         return response.json();
     })
     .then(data => {
@@ -153,8 +174,6 @@ fetch('assets/data/jobs.json')
     .catch(error => {
         console.error('Error loading JSON:', error);
     });
-
-
 
 
 
@@ -2320,26 +2339,26 @@ window.addEventListener("resize", () => {
 // FINAL INITIALIZATION
 // ======================================
 
-window.addEventListener("DOMContentLoaded", () => {
+//    window.addEventListener("DOMContentLoaded", () => {
 
     // 1. Saved AppState load
-    restoreAppState();
+   // restoreAppState();
 
     // 2. Job Data → allJobs
-     buildSearchData();
+ //    buildSearchData();
 
     // 3. Central State → DOM Inputs
-    syncStateToInputs();
+ //   syncStateToInputs();
 
     // 4. Bookmarks
-    loadBookmarks();
-    setupBookmarkButtons();
-    updateBookmarkIcons();
+ //   loadBookmarks();
+ //   setupBookmarkButtons();
+//    updateBookmarkIcons();
   
     // 5. Apply saved filters
-    applySearchFilters();
+//    applySearchFilters();
 
-});
+ //    });
   
   
     
