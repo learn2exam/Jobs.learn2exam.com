@@ -1,5 +1,5 @@
 
-
+✅✅😂😂
   
   
   // ======================================
@@ -210,15 +210,18 @@ const AppState = {
 const StorageManager = {
 
     save(key, value) {
-        try {
-            localStorage.setItem(
-                key,
-                JSON.stringify(value)
-            );
-        } catch (err) {
-            console.warn("Storage Save Failed", err);
-        }
-    },
+    try {
+        localStorage.setItem(
+            key,
+            JSON.stringify(value)
+        );
+        return true; // Explicit Success Signal
+    } catch (err) {
+        console.warn("Storage Save Failed", err);
+        return false; // Explicit Failure Signal
+    }
+}
+,
 
     load(key, defaultValue = null) {
         try {
@@ -254,19 +257,251 @@ let currentShareData = null;
   
 // ======================================
 // 11. APPLICATION STATE PERSISTENCE
-// ====================================== 
+// E4-3 — LOCALSTORAGE WRITE OPTIMIZATION (FINAL & ACCURATE)
+// ======================================
+
+let appStateSaveTimer = null;
+let appStatePersistencePending = false;
+let isRestoringAppState = false; // Restoration Protection Lock
+
+
+// --------------------------------------
+// SAVE APP STATE
+// Controlled Debounced Persistence
+// --------------------------------------
+
 function saveAppState() {
-    StorageManager.save("learn2exam_app_state", AppState);
+
+    // Guard: Prevent saving while restoration is in progress
+    if (isRestoringAppState) return;
+
+    appStatePersistencePending = true;
+
+    clearTimeout(appStateSaveTimer);
+
+    appStateSaveTimer = setTimeout(() => {
+
+        try {
+
+            const isSaved = StorageManager.save(
+                "learn2exam_app_state",
+                AppState
+            );
+
+            // Clear pending flag ONLY if save explicitly succeeded
+            if (isSaved === true) {
+                appStatePersistencePending = false;
+            }
+
+        } catch (err) {
+
+            console.warn(
+                "AppState Save Failed",
+                err
+            );
+
+            // Keep appStatePersistencePending = true for retry
+
+        }
+
+        appStateSaveTimer = null;
+
+    }, 1000);
 }
+
+
+// --------------------------------------
+// FLUSH APP STATE
+// Immediate Persistence Engine
+// --------------------------------------
+
+function flushAppState() {
+
+    clearTimeout(appStateSaveTimer);
+    appStateSaveTimer = null;
+
+    if (!appStatePersistencePending || isRestoringAppState) {
+        return;
+    }
+
+    try {
+
+        const isSaved = StorageManager.save(
+            "learn2exam_app_state",
+            AppState
+        );
+
+        if (isSaved === true) {
+            appStatePersistencePending = false;
+        }
+
+    } catch (err) {
+
+        console.warn(
+            "AppState Flush Failed",
+            err
+        );
+
+    }
+}
+
+
+// --------------------------------------
+// RESTORE APP STATE
+// Defensive State Validation
+// --------------------------------------
+
 function restoreAppState() {
 
-    const savedState =
-        StorageManager.load("learn2exam_app_state");
+    isRestoringAppState = true; // Lock auto-saves during hydration
 
-    if (!savedState) return;
+    let savedState = null;
 
-    Object.assign(AppState, savedState);
+    try {
+
+        savedState =
+            StorageManager.load(
+                "learn2exam_app_state"
+            );
+
+    } catch (err) {
+
+        console.warn(
+            "AppState Restore Failed",
+            err
+        );
+
+        isRestoringAppState = false;
+        return;
+    }
+
+
+    // ----------------------------------
+    // Validate Root State
+    // ----------------------------------
+
+    if (
+        !savedState ||
+        typeof savedState !== "object" ||
+        Array.isArray(savedState)
+    ) {
+        isRestoringAppState = false;
+        return;
+    }
+
+
+    // ----------------------------------
+    // Restore Primitive State
+    // ----------------------------------
+
+    if (
+        Number.isInteger(savedState.currentPage) &&
+        savedState.currentPage >= 1
+    ) {
+        AppState.currentPage =
+            savedState.currentPage;
+    }
+
+
+    if (
+        typeof savedState.searchKeyword === "string"
+    ) {
+        AppState.searchKeyword =
+            savedState.searchKeyword;
+    }
+
+
+    if (
+        typeof savedState.sortBy === "string"
+    ) {
+        AppState.sortBy =
+            savedState.sortBy;
+    }
+
+
+    // ----------------------------------
+    // Restore Filters Safely
+    // ----------------------------------
+
+    if (
+        savedState.filters &&
+        typeof savedState.filters === "object" &&
+        !Array.isArray(savedState.filters)
+    ) {
+
+        const filterKeys = [
+            "heroCategory",
+            "heroState",
+            "category",
+            "department",
+            "qualification",
+            "state",
+            "jobType",
+            "salary",
+            "lastDate"
+        ];
+
+        filterKeys.forEach(key => {
+
+            if (
+                typeof savedState.filters[key] === "string"
+            ) {
+                AppState.filters[key] =
+                    savedState.filters[key];
+            }
+
+        });
+
+    }
+
+
+    // ----------------------------------
+    // Restore Filtered Jobs Safely
+    // Do not trust persisted derived data
+    // ----------------------------------
+
+    AppState.filteredJobs = [];
+
+
+    // ----------------------------------
+    // Restored State is Already Persisted
+    // ----------------------------------
+
+    appStatePersistencePending = false;
+
+    clearTimeout(appStateSaveTimer);
+    appStateSaveTimer = null;
+
+    // Release Restoration Lock
+    isRestoringAppState = false;
 }
+
+
+// ======================================
+// E4-3 — APPLICATION LIFECYCLE FLUSH
+// Safe Separate Event Binding
+// ======================================
+
+
+// 1. Visibility Change: Runs when switching tabs/minimizing
+document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") {
+        flushAppState();
+    }
+});
+
+
+// 2. Page Hide: Mobile / Safari Lifecycle Exit (Always Flush)
+window.addEventListener("pagehide", () => {
+    flushAppState();
+});
+
+
+// 3. Before Unload: Desktop Tab Close / Reload (Always Flush)
+window.addEventListener("beforeunload", () => {
+    flushAppState();
+});
+
     
 // ======================================
 // 12. THEME MANAGEMENT
@@ -812,6 +1047,11 @@ function syncStateToInputs() {
 // CENTRAL SEARCH STATE
 // DOM → AppState → DOM
 // ======================================
+// ======================================
+// E4-1 — SEARCH PERFORMANCE HARDENING
+// Immediate Raw Sync + Debounced Processing
+// ======================================
+
 function handleSearchInput(source) {
 
     const input =
@@ -821,29 +1061,60 @@ function handleSearchInput(source) {
 
     if (!input) return;
 
-    // ----------------------------------
-    // DOM → Central AppState
-    // ----------------------------------
-    AppState.searchKeyword =
-        input.value.trim().toLowerCase();
 
-    // Search change → first page
+    // ----------------------------------
+    // 1. RAW DOM VALUE
+    //    User की typing को exactly preserve करें
+    // ----------------------------------
+
+    const rawValue = input.value;
+
+
+    // ----------------------------------
+    // 2. IMMEDIATE DOM → DOM SYNC
+    //    Header ↔ Hero
+    // ----------------------------------
+
+    if (jobSearch && jobSearch !== input) {
+        jobSearch.value = rawValue;
+    }
+
+    if (headerSearch && headerSearch !== input) {
+        headerSearch.value = rawValue;
+    }
+
+
+    // ----------------------------------
+    // 3. DOM → AppState
+    //    Search के लिए normalized value
+    // ----------------------------------
+
+    AppState.searchKeyword =
+        rawValue.trim().toLowerCase();
+
     AppState.currentPage = 1;
 
-    // ----------------------------------
-    // Persist Central State
-    // ----------------------------------
-    saveAppState();
 
     // ----------------------------------
-    // AppState → DOM
+    // 4. CANCEL PREVIOUS SEARCH
     // ----------------------------------
-    syncStateToInputs();
+
+    clearTimeout(debounceTimer);
+
 
     // ----------------------------------
-    // Central Search Pipeline
+    // 5. DEBOUNCED EXPENSIVE OPERATIONS
     // ----------------------------------
-    applySearchFilters();
+
+    debounceTimer = setTimeout(() => {
+
+        // Persist Central State
+        saveAppState();
+
+        // Central Search Pipeline
+        applySearchFilters();
+
+    }, 250);
 }
     
     
@@ -1153,7 +1424,7 @@ function updateAppStateFromFilters() {
 // ======================================
 
 function applySearchFilters() {
-
+console.count("SEARCH PIPELINE");
     updateFilterCount();
 
 
